@@ -1,49 +1,104 @@
-/* PUP CURA - Grand Minimalism Design System
+/* =========================================================
+   PUP CURA
+   Grand Minimalism Design System
    Palette: Porcelain (#FBFEF9) & Onyx (#0A0A0B)
-   Font: Rig (Primary), Inter (Secondary/Body)
+   Fonts: Mosvita (Primary), Blanco (Display), Satoshi (Body)
    ========================================================= */
 
-/* === FONT FACE === */
+/* === MOSVITA — Primary Display & Headings === */
 @font-face {
-    font-family: "Rig";
-    src: url("Rig face family/fonts/fonnts.com-Rig_Sans_Light.otf")
-        format("opentype");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Rig";
-    src: url("Rig face family/fonts/fonnts.com-Rig_Sans_Regular.otf")
-        format("opentype");
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-Regular.woff") format("woff");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Rig";
-    src: url("Rig face family/fonts/fonnts.com-Rig_Sans_Medium.otf")
-        format("opentype");
-    font-weight: 500;
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-Light.woff") format("woff");
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Rig";
-    src: url("Rig face family/fonts/fonnts.com-Rig_Sans_Semibold.otf")
-        format("opentype");
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-SemiBold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Rig";
-    src: url("Rig face family/fonts/fonnts.com-Rig_Sans_Bold.otf")
-        format("opentype");
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Mosvita";
+    src: url("Mosvita WOFF/Mosvita-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* === BLANCO — Brand & Hero Display === */
+@font-face {
+    font-family: "Blanco";
+    src: url("Blanco WOFF/BLANCO.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blanco";
+    src: url("Blanco WOFF/Blancoliga.woff") format("woff");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* === SATOSHI — Body & UI Text === */
+@font-face {
+    font-family: "Satoshi";
+    src: url("Satoshi WOFF/Satoshi-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("Satoshi WOFF/Satoshi-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("Satoshi WOFF/Satoshi-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("Satoshi WOFF/Satoshi-Bold.woff") format("woff");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -56,8 +111,13 @@
     --muted: rgba(10, 10, 11, 0.5);
     --border: rgba(10, 10, 11, 0.08);
     --border-strong: rgba(10, 10, 11, 0.15);
-    --font-primary: "Rig", "Helvetica Neue", sans-serif;
-    --font-secondary: "Inter", -apple-system, sans-serif;
+
+    /* Font stack */
+    --font-primary: "Mosvita", "Helvetica Neue", sans-serif;
+    --font-display: "Blanco", "Mosvita", serif;
+    --font-body: "Satoshi", -apple-system, sans-serif;
+
+    /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 2rem;
@@ -65,6 +125,8 @@
     --space-xl: 8rem;
     --space-2xl: 12rem;
     --space-3xl: 16rem;
+
+    /* Transitions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --transition-fast: 0.25s ease;
     --transition-base: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -104,9 +166,7 @@ body {
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition:
-        opacity 0.8s var(--ease-out),
-        transform 0.8s var(--ease-out);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
 }
 
 .reveal.is-visible {
@@ -157,9 +217,10 @@ body {
 }
 
 .brand {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--onyx);
     position: relative;
@@ -190,8 +251,8 @@ body {
 }
 
 .nav-links a {
-    font-family: var(--font-secondary);
-    font-size: 0.7rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -238,15 +299,17 @@ body {
 }
 
 .hero-content h1 {
+    font-family: var(--font-display);
     font-size: clamp(4rem, 12vw, 10rem);
     font-weight: 400;
     line-height: 0.9;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.04em;
     margin-bottom: var(--space-sm);
     color: var(--onyx);
 }
 
 .hero-content h2 {
+    font-family: var(--font-primary);
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     font-weight: 300;
     line-height: 1.4;
@@ -259,8 +322,8 @@ body {
 }
 
 .hero-content p {
-    font-family: var(--font-secondary);
-    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.6;
     color: var(--muted);
@@ -301,7 +364,7 @@ body {
     color: var(--porcelain);
     text-decoration: none;
     border-radius: 100px;
-    font-family: var(--font-secondary);
+    font-family: var(--font-body);
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -332,9 +395,10 @@ body {
 }
 
 .marquee-text {
+    font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 400;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     white-space: nowrap;
     padding-right: var(--space-lg);
     color: var(--onyx);
@@ -350,9 +414,10 @@ body {
 }
 
 .about h2 {
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 400;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     line-height: 1.1;
     margin-bottom: var(--space-md);
     color: var(--onyx);
@@ -362,7 +427,7 @@ body {
 }
 
 .about p {
-    font-family: var(--font-secondary);
+    font-family: var(--font-body);
     font-size: clamp(0.9rem, 1.2vw, 1.05rem);
     line-height: 1.8;
     color: var(--muted);
@@ -383,7 +448,7 @@ body {
 }
 
 .categories .section-label {
-    font-family: var(--font-secondary);
+    font-family: var(--font-body);
     font-size: 0.65rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -393,9 +458,10 @@ body {
 }
 
 .categories .section-title {
+    font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 400;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     color: var(--onyx);
 }
 
@@ -452,9 +518,10 @@ body {
 }
 
 .category-card h3 {
+    font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     position: relative;
     z-index: 1;
     transition: color 0.4s ease;
@@ -495,9 +562,10 @@ body {
 .nutrition h2,
 .health h2,
 .daily-care h2 {
+    font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 400;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     text-align: left;
     margin-bottom: var(--space-xl);
     color: var(--onyx);
@@ -533,8 +601,9 @@ body {
 }
 
 .guide-card h3 {
+    font-family: var(--font-primary);
     font-size: 1.15rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-sm);
     color: var(--onyx);
@@ -546,8 +615,8 @@ body {
 }
 
 .guide-card li {
-    font-family: var(--font-secondary);
-    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     padding: var(--space-xs) 0;
     padding-left: var(--space-md);
     position: relative;
@@ -564,8 +633,8 @@ body {
 }
 
 .guide-card p {
-    font-family: var(--font-secondary);
-    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     line-height: 1.7;
     color: var(--muted);
 }
@@ -585,16 +654,17 @@ body {
 }
 
 .contact-info h2 {
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 400;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     line-height: 1.1;
     margin-bottom: var(--space-md);
 }
 
 .contact-info p {
-    font-family: var(--font-secondary);
-    font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
     line-height: 1.8;
     color: rgba(251, 254, 249, 0.6);
     max-width: 400px;
@@ -612,8 +682,8 @@ body {
 
 .form-group label {
     display: block;
-    font-family: var(--font-secondary);
-    font-size: 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -665,7 +735,6 @@ body {
     color: var(--porcelain);
 }
 
-/* Footer CTA Area */
 .footer-top {
     padding: var(--space-3xl) 0;
     border-bottom: 1px solid rgba(251, 254, 249, 0.1);
@@ -673,8 +742,8 @@ body {
 }
 
 .footer-cta-label {
-    font-family: var(--font-secondary);
-    font-size: 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -683,9 +752,10 @@ body {
 }
 
 .footer-cta-title {
+    font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 7rem);
     font-weight: 400;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.05em;
     line-height: 1;
     color: var(--porcelain);
     cursor: pointer;
@@ -715,14 +785,13 @@ body {
 }
 
 .footer-cta-email {
-    font-family: var(--font-secondary);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: rgba(251, 254, 249, 0.4);
     margin-top: var(--space-md);
     letter-spacing: 0.05em;
 }
 
-/* Footer Main */
 .footer-bottom {
     padding: var(--space-xl) 0 var(--space-md);
 }
@@ -735,17 +804,18 @@ body {
 }
 
 .footer-brand .footer-logo {
+    font-family: var(--font-display);
     font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-weight: 400;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: var(--space-sm);
     display: block;
 }
 
 .footer-tagline {
-    font-family: var(--font-secondary);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     line-height: 1.7;
     color: rgba(251, 254, 249, 0.4);
     max-width: 280px;
@@ -758,7 +828,8 @@ body {
 }
 
 .footer-nav-col h4 {
-    font-size: 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -775,8 +846,8 @@ body {
 }
 
 .footer-nav-col a {
-    font-family: var(--font-secondary);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: rgba(251, 254, 249, 0.6);
     position: relative;
     display: inline-block;
@@ -801,7 +872,6 @@ body {
     width: 100%;
 }
 
-/* Footer Legal */
 .footer-legal {
     display: flex;
     justify-content: space-between;
@@ -811,8 +881,8 @@ body {
 }
 
 .footer-legal p {
-    font-family: var(--font-secondary);
-    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
     color: rgba(251, 254, 249, 0.3);
     letter-spacing: 0.02em;
 }
@@ -823,8 +893,8 @@ body {
 }
 
 .footer-legal-links a {
-    font-family: var(--font-secondary);
-    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
     color: rgba(251, 254, 249, 0.3);
 }
 
