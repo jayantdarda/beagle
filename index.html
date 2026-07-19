@@ -5,29 +5,87 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>PUP CURA | Dog Care & Wellness</title>
         <link rel="stylesheet" href="style.css" />
-<<<<<<< HEAD
-=======
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Oswald:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
->>>>>>> 36327efa97579fa92ce6b4997cb7f727e6d642ac
     </head>
     <body>
-        <!-- NAVBAR -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="#" class="brand">PUP CURA</a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#training">Training</a></li>
-                    <li><a href="#nutrition">Nutrition</a></li>
-                    <li><a href="#health">Health</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+        <!-- PRE-LOADER -->
+        <div class="page-loader" id="pageLoader" aria-hidden="true">
+            <div class="page-loader__bg"></div>
+            <div class="page-loader__mark">
+                <span class="page-loader__half page-loader__half--left">PUP</span>
+                <span class="page-loader__num" id="loaderNum">0</span>
+                <span class="page-loader__half page-loader__half--right">CURA</span>
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <nav class="nav" id="nav">
+            <div class="nav__inner">
+                <a href="#" class="nav__logo">PUP CURA</a>
+                <button
+                    class="nav__toggle"
+                    id="navToggle"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                >
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                </button>
             </div>
         </nav>
+
+        <!-- MENU OVERLAY -->
+        <div class="menu" id="menu" aria-hidden="true">
+            <div class="menu__inner">
+                <div class="menu__col menu__col--nav">
+                    <ul class="menu__links">
+                        <li>
+                            <a href="#home" class="menu__link" data-text="Home">
+                                <span class="menu__link-text">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="menu__link" data-text="About">
+                                <span class="menu__link-text">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#training" class="menu__link" data-text="Guides">
+                                <span class="menu__link-text">Guides</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#nutrition" class="menu__link" data-text="Care">
+                                <span class="menu__link-text">Care</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#health" class="menu__link" data-text="Health">
+                                <span class="menu__link-text">Health</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="menu__link" data-text="Contact">
+                                <span class="menu__link-text">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="menu__meta">
+                        <a href="#" class="menu__chip">Playground</a>
+                        <a href="#" class="menu__chip">LinkedIn</a>
+                        <a href="#" class="menu__chip">Instagram</a>
+                        <a href="mailto:hello@pupcura.com" class="menu__chip menu__chip--cta">Contact Us</a>
+                    </div>
+                </div>
+                <div class="menu__col menu__col--media" aria-hidden="true"></div>
+            </div>
+        </div>
 
         <!-- HERO SECTION -->
         <header id="home" class="hero">
@@ -323,58 +381,61 @@
 
         <!-- FOOTER -->
         <footer class="footer">
-            <div class="footer-top">
+            <div class="footer__top">
                 <div class="container">
-                    <div class="footer-cta">
-                        <p class="footer-cta-label">Get in touch</p>
-                        <h2 class="footer-cta-title">Lets chat.</h2>
-                        <p class="footer-cta-email">hello@pupcura.com</p>
-                    </div>
+                    <ul class="footer__nav">
+                        <li>
+                            <a href="#about" class="footer__link" data-text="About">
+                                <span class="footer__link-text">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#training" class="footer__link" data-text="Guides">
+                                <span class="footer__link-text">Guides</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#health" class="footer__link" data-text="Wellness">
+                                <span class="footer__link-text">Wellness</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="footer__link" data-text="Connect">
+                                <span class="footer__link-text">Connect</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer__bottom">
                 <div class="container">
-                    <div class="footer-row">
-                        <div class="footer-brand">
-                            <span class="footer-logo">PUP CURA</span>
-                            <p class="footer-tagline">
-                                Practical guidance on training, nutrition,
-                                health, and daily care.
-                            </p>
-                        </div>
-                        <div class="footer-nav-grid">
-                            <div class="footer-nav-col">
-                                <h4>Explore</h4>
-                                <ul>
-                                    <li><a href="#home">Home</a></li>
-                                    <li><a href="#about">About</a></li>
-                                    <li><a href="#training">Training</a></li>
-                                    <li><a href="#nutrition">Nutrition</a></li>
-                                </ul>
+                    <div class="footer__row">
+                        <a href="mailto:hello@pupcura.com" class="footer-phone-link">
+                            <span class="footer-phone-icon" aria-hidden="true">☎</span>
+                            <span class="footer-phone-text">Let's chat. hello@pupcura.com</span>
+                            <span class="footer-phone-text footer-phone-text--alt">Schedule a Call</span>
+                        </a>
+                        <form class="footer__nl" onsubmit="event.preventDefault();">
+                            <label for="nlEmail" class="footer__nl-label">Subscribe for the latest.</label>
+                            <div class="footer__nl-input">
+                                <input
+                                    type="email"
+                                    id="nlEmail"
+                                    name="email"
+                                    placeholder="you@gooddogs.com"
+                                    required
+                                />
+                                <button type="submit" aria-label="Subscribe">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                        <path d="M5 12h14M13 6l6 6-6 6" />
+                                    </svg>
+                                </button>
                             </div>
-                            <div class="footer-nav-col">
-                                <h4>Resources</h4>
-                                <ul>
-                                    <li><a href="#health">Health</a></li>
-                                    <li><a href="#contact">Contact</a></li>
-                                    <li><a href="#">Guides</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-nav-col">
-                                <h4>Connect</h4>
-                                <ul>
-                                    <li><a href="#">Instagram</a></li>
-                                    <li><a href="#">Twitter</a></li>
-                                    <li><a href="#">LinkedIn</a></li>
-                                    <li><a href="#">YouTube</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="footer-legal">
-                        <p>&copy; 2026 Pup Cura. All rights reserved.</p>
-                        <div class="footer-legal-links">
+                    <div class="footer__legal">
+                        <p>&copy; 2026 PUP CURA. Made with care.</p>
+                        <div class="footer__legal-links">
                             <a href="#">Privacy</a>
                             <a href="#">Terms</a>
                         </div>
@@ -383,21 +444,129 @@
             </div>
         </footer>
 
+        <!-- SIDE LABELS -->
+        <span class="side-label side-label--left">&copy; 2026</span>
+        <span class="side-label side-label--right">Made with care.</span>
+
         <script>
-            // Smooth scroll for nav links
+            // ============================================================
+            // PRE-LOADER
+            // Counter ramps 0 -> ~90, mirrors letsplayfight.com behavior.
+            // ============================================================
+            (function () {
+                const loader = document.getElementById("pageLoader");
+                const numEl = document.getElementById("loaderNum");
+                if (!loader || !numEl) return;
+
+                let shown = 0;
+                const start = performance.now();
+                const DURATION = 2000;
+
+                const schedule = (t) => {
+                    if (t < 0.25) return 70 * (t / 0.25);
+                    if (t < 0.45) return 70;
+                    if (t < 0.6) return 70 + 10 * ((t - 0.45) / 0.15);
+                    if (t < 0.75) return 80;
+                    if (t < 0.9) return 80 + 10 * ((t - 0.75) / 0.15);
+                    return 90 + 9 * ((t - 0.9) / 0.1);
+                };
+
+                const ease = (n, target) => n + 0.09 * (target - n);
+
+                function tick(now) {
+                    const t = Math.min((now - start) / DURATION, 1);
+                    const target = schedule(t);
+                    shown = ease(shown, Math.min(target, 99));
+                    numEl.textContent = Math.round(shown);
+                    if (shown < 99) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        setTimeout(finish, 250);
+                    }
+                }
+
+                function finish() {
+                    loader.classList.add("is-done");
+                    document.body.classList.add("is-loaded");
+                    setTimeout(() => {
+                        loader.setAttribute("aria-hidden", "true");
+                        loader.style.visibility = "hidden";
+                        loader.style.pointerEvents = "none";
+                    }, 1100);
+                }
+
+                if (document.readyState === "complete") {
+                    requestAnimationFrame(tick);
+                } else {
+                    window.addEventListener(
+                        "load",
+                        () => requestAnimationFrame(tick),
+                        { once: true },
+                    );
+                }
+            })();
+
+            // ============================================================
+            // MENU OVERLAY
+            // ============================================================
+            (function () {
+                const toggle = document.getElementById("navToggle");
+                const menu = document.getElementById("menu");
+                if (!toggle || !menu) return;
+
+                const closeMenu = () => {
+                    menu.classList.remove("is-open");
+                    toggle.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                    menu.setAttribute("aria-hidden", "true");
+                    toggle.setAttribute("aria-label", "Open menu");
+                    document.body.classList.remove("is-locked");
+                    document.body.classList.remove("is-menu-open");
+                };
+
+                const openMenu = () => {
+                    menu.classList.add("is-open");
+                    toggle.classList.add("is-open");
+                    toggle.setAttribute("aria-expanded", "true");
+                    menu.setAttribute("aria-hidden", "false");
+                    toggle.setAttribute("aria-label", "Close menu");
+                    document.body.classList.add("is-locked");
+                    document.body.classList.add("is-menu-open");
+                };
+
+                toggle.addEventListener("click", () => {
+                    if (menu.classList.contains("is-open")) closeMenu();
+                    else openMenu();
+                });
+
+                menu.querySelectorAll('a[href^="#"]').forEach((a) =>
+                    a.addEventListener("click", closeMenu),
+                );
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape" && menu.classList.contains("is-open")) {
+                        closeMenu();
+                    }
+                });
+            })();
+
+            // ============================================================
+            // SMOOTH SCROLL
+            // ============================================================
             document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
                 anchor.addEventListener("click", function (e) {
+                    const id = this.getAttribute("href");
+                    if (id === "#" || id.length < 2) return;
+                    const target = document.querySelector(id);
+                    if (!target) return;
                     e.preventDefault();
-                    const target = document.querySelector(
-                        this.getAttribute("href"),
-                    );
-                    if (target) {
-                        target.scrollIntoView({ behavior: "smooth" });
-                    }
+                    target.scrollIntoView({ behavior: "smooth" });
                 });
             });
 
-            // Scroll reveal animation
+            // ============================================================
+            // SCROLL REVEAL
+            // ============================================================
             const revealElements = document.querySelectorAll(".reveal");
             const revealObserver = new IntersectionObserver(
                 (entries) => {
@@ -409,7 +578,6 @@
                 },
                 { threshold: 0.1 },
             );
-
             revealElements.forEach((el) => revealObserver.observe(el));
         </script>
     </body>
