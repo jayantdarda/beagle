@@ -613,80 +613,425 @@ body.is-loaded .side-label {
     transform: translateY(-50%) rotate(90deg);
 }
 
-/* === HERO SECTION === */
+/* ===========================================================
+   HERO SECTION (podium.global-inspired)
+   Full-bleed image · film grain overlay · scroll-pinned exit
+   =========================================================== */
 .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--porcelain);
-    position: relative;
     overflow: hidden;
-    padding: var(--space-xl) 0;
+    background: var(--onyx);
+    /* Hero pins on scroll — native scroll-driven animation.
+       Browsers without animation-timeline fall back to no pin
+       (the page just scrolls normally, hero parallax handled in JS). */
+    animation: hero-pin linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+}
+
+@keyframes hero-pin {
+    to { transform: translateY(100vh); }
+}
+
+/* Hero media — image + darkening overlay + grain already global */
+.hero__media {
+    position: absolute;
+    inset: -5%;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+.hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    filter: saturate(0.85) contrast(1.05);
+    animation: hero-scale 1.4s var(--ease-out) both;
+}
+
+@keyframes hero-scale {
+    from { transform: scale(1.12); }
+    to   { transform: scale(1); }
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(10, 10, 11, 0.45) 0%,
+            rgba(10, 10, 11, 0.15) 30%,
+            rgba(10, 10, 11, 0) 60%,
+            rgba(10, 10, 11, 0.55) 100%
+        );
 }
 
 .hero-content {
-    text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 3;
+    text-align: center;
+    color: var(--porcelain);
+    padding: 0 1.5rem;
+    max-width: 90%;
+}
+
+.hero__eyebrow {
+    font-family: var(--font-oswald);
+    font-size: clamp(0.65rem, 0.8vw, 0.78rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(251, 254, 249, 0.7);
+    margin-bottom: 1.5rem;
 }
 
 .hero-content h1 {
     font-family: var(--font-display);
-    font-size: clamp(4rem, 12vw, 10rem);
-    font-weight: 400;
+    font-size: clamp(3.5rem, 11vw, 9rem);
+    font-weight: 700;
     line-height: 0.9;
     letter-spacing: -0.04em;
-    margin-bottom: var(--space-sm);
-    color: var(--onyx);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: var(--porcelain);
 }
 
-.hero-content h2 {
-    font-family: var(--font-primary);
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+.hero__sub {
+    font-family: var(--font-serif);
+    font-style: italic;
     font-weight: 300;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-md);
-    color: var(--onyx);
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    color: rgba(251, 254, 249, 0.85);
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
 }
 
-.hero-content p {
+.hero__lede {
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: clamp(0.95rem, 1.3vw, 1.2rem);
     font-weight: 400;
     line-height: 1.6;
-    color: var(--muted);
-    max-width: 380px;
-    margin: 0 auto var(--space-md);
-    letter-spacing: 0.01em;
+    color: rgba(251, 254, 249, 0.7);
+    max-width: 36ch;
+    margin: 0 auto 2.5rem;
 }
 
-/* Hero decorative elements */
-.hero-ornament {
+.hero .btn-primary {
+    background: var(--porcelain);
+    color: var(--onyx);
+    border-color: var(--porcelain);
+}
+
+.hero .btn-primary:hover {
+    background: transparent;
+    color: var(--porcelain);
+}
+
+/* Scroll Down indicator — bottom center, animated vertical line */
+.hero__scroll {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    border: 1px solid var(--border-strong);
-    border-radius: 50%;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--porcelain);
+}
+
+.hero__scroll span {
+    font-family: var(--font-oswald);
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    opacity: 0.7;
+}
+
+.hero__scroll-line {
+    width: 1px;
+    height: 32px;
+    background: var(--porcelain);
+    transform-origin: top center;
+    animation: scroll-line 2.4s var(--ease-out) infinite;
+}
+
+@keyframes scroll-line {
+    0%   { transform: scaleY(0); opacity: 0; }
+    40%  { transform: scaleY(1); opacity: 1; }
+    80%  { transform: scaleY(1); opacity: 0; }
+    100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ===========================================================
+   FILM GRAIN (whole page) — fixed canvas, blended overlay
+   =========================================================== */
+canvas.grain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+    mix-blend-mode: overlay;
+    opacity: 0.08;
+}
+
+/* ===========================================================
+   SCROLL PROGRESS — fixed bottom-left percentage
+   =========================================================== */
+.progress {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 2rem;
+    z-index: 200;
+    font-family: var(--font-oswald);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--onyx);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    color: #fff;
+}
+
+body.is-menu-open .progress { opacity: 0; transition: opacity 0.3s ease; }
+
+/* ===========================================================
+   SCROLL-REVEAL ANIMATIONS
+   Native animation-timeline: view() with IntersectionObserver fallback.
+   =========================================================== */
+@keyframes section-rise {
+    from { opacity: 0; transform: translateY(2.5rem); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-anim {
+    /* Fallback state for non-supporting browsers, overridden by JS observer */
+    opacity: 0;
+    transform: translateY(2.5rem);
+    animation: section-rise 0.9s var(--ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+}
+
+.section-anim.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================================
+   BEHIND THE SCENES — asymmetric 3D-style image grid
+   =========================================================== */
+.bts {
+    padding: var(--space-3xl) 0;
+    background: var(--onyx);
+    color: var(--porcelain);
+    position: relative;
+    overflow: hidden;
+}
+
+.bts .section-label {
+    font-family: var(--font-oswald);
+    font-weight: 500;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: rgba(251, 254, 249, 0.55);
+    margin-bottom: 1.25rem;
+}
+
+.bts .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--porcelain);
+    max-width: 14ch;
+    margin-bottom: var(--space-xl);
+}
+
+.grid-asym {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+.img-wrap {
+    position: relative;
+    overflow: hidden;
+    background: rgba(251, 254, 249, 0.04);
+    transition: opacity 0.5s var(--ease-out);
+}
+
+/* Sibling fade on hover — podium's project-list-hover-fade trick */
+.grid-asym:has(.img-wrap:hover) .img-wrap:not(:hover) {
+    opacity: 0.4;
+}
+
+.img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: translateY(8%) scale(1.1);
+    transition: transform 1.4s var(--ease-out), filter 0.6s ease;
+    filter: saturate(0.85) contrast(1.05);
+}
+
+.img-wrap.is-revealed img {
+    transform: translateY(0) scale(1);
+}
+
+.img-wrap:hover img {
+    transform: translateY(0) scale(1.04);
+}
+
+/* Wipe mask that slides up to reveal the image */
+.img-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--onyx);
+    transform: translateY(0);
+    transition: transform 1s var(--ease-out);
+    z-index: 2;
+}
+
+.img-wrap.is-revealed::before {
+    transform: translateY(-100%);
+}
+
+.img-wrap figcaption {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 3;
+    font-family: var(--font-oswald);
+    font-weight: 500;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--porcelain);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.img-wrap:hover figcaption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.grid-asym .a { grid-column: 1 / 5;   aspect-ratio: 2 / 3;    margin-top: 4rem;  }
+.grid-asym .b { grid-column: 6 / 12;  aspect-ratio: 3 / 2;                       }
+.grid-asym .c { grid-column: 9 / 13;  aspect-ratio: 4 / 5;    margin-top: 14rem; }
+
+/* ===========================================================
+   HORIZONTAL PINNED GALLERY (services in motion)
+   =========================================================== */
+.hscroll {
+    height: 300vh;
+    position: relative;
+    background: var(--porcelain);
+}
+
+.hscroll__track {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.hscroll__intro {
+    position: absolute;
+    top: 8rem;
+    left: 5%;
+    z-index: 2;
     pointer-events: none;
 }
 
-.hero-ornament-1 {
-    top: 15%;
-    left: 10%;
-    animation: float 6s ease-in-out infinite;
+.hscroll__intro .section-label {
+    font-family: var(--font-oswald);
+    font-weight: 500;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    margin-bottom: 1rem;
 }
 
-.hero-ornament-2 {
-    bottom: 20%;
-    right: 15%;
-    width: 120px;
-    height: 120px;
-    animation: float 7s ease-in-out infinite 1s;
+.hscroll__intro .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: var(--onyx);
+    max-width: 12ch;
+}
+
+.hscroll__strip {
+    display: flex;
+    gap: 2rem;
+    padding: 0 5%;
+    padding-left: 40%;
+    height: 60vh;
+    align-items: center;
+    will-change: transform;
+    transform: translateX(0);
+    animation: hscroll-x linear both;
+    animation-timeline: scroll(root);
+    animation-range: 100vh 400vh; /* tuned to .hscroll height */
+}
+
+@keyframes hscroll-x {
+    to { transform: translateX(calc(-100% + 100vw)); }
+}
+
+.hscroll__item {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(280px, 36vw, 520px);
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--border);
+}
+
+.hscroll__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) contrast(1.05);
+    transition: transform 1.2s var(--ease-out);
+}
+
+.hscroll__item:hover img {
+    transform: scale(1.05);
+}
+
+.hscroll__item figcaption {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 2;
+    font-family: var(--font-oswald);
+    font-weight: 500;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--porcelain);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* === BUTTONS === */
@@ -1329,6 +1674,48 @@ body.is-loaded .side-label {
     }
 }
 
+@media (max-width: 900px) {
+    .menu__inner,
+    .footer__row { grid-template-columns: 1fr; gap: var(--space-lg); }
+    .menu__col--media { display: none; }
+    .menu__col { gap: var(--space-lg); }
+    .side-label { display: none; }
+
+    /* Asymmetric grid collapses to a single column */
+    .grid-asym { grid-template-columns: 1fr; gap: 1rem; }
+    .grid-asym .a,
+    .grid-asym .b,
+    .grid-asym .c {
+        grid-column: 1;
+        margin-top: 0;
+        aspect-ratio: 4 / 5;
+    }
+
+    /* Horizontal gallery becomes a vertical stack (no pin) */
+    .hscroll { height: auto; }
+    .hscroll__track {
+        position: relative;
+        height: auto;
+        padding: 4rem 0 2rem;
+    }
+    .hscroll__intro {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 0 1.5rem 2rem;
+    }
+    .hscroll__strip {
+        animation: none;
+        transform: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0 1.5rem;
+        height: auto;
+    }
+    .hscroll__item { width: 100%; aspect-ratio: 4 / 5; }
+}
+
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 3rem;
@@ -1351,4 +1738,25 @@ body.is-loaded .side-label {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
     }
+}
+
+/* ===========================================================
+   REDUCED MOTION — strip all animation/parallax
+   =========================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero { animation: none !important; }
+    .hscroll__strip { animation: none !important; transform: none !important; }
+    .section-anim { opacity: 1 !important; transform: none !important; }
+    .img-wrap img { transform: none !important; }
+    .img-wrap::before { display: none; }
+    canvas.grain { display: none; }
 }
